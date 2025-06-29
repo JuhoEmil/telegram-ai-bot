@@ -1,6 +1,6 @@
-echo "venv/" > .gitignore
-echo ".env" >> .gitignore
-echo "__pycache__/" >> .gitignore
-echo "*.pyc" >> .gitignore
-echo "telegram-ai-bot-backup.tar.gz" >> .gitignore
-echo "tg/" >> .gitignore
+venv/
+.env
+__pycache__/
+*.pyc
+telegram-ai-bot-backup.tar.gz
+tg/
