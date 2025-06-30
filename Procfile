@@ -1,1 +1,2 @@
-worker: python bot.py
+rm Procfile
+git rm Procfile
