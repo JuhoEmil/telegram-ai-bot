@@ -20,7 +20,6 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
     try:
-        # Generate response with Gemini
         response = model.generate_content(text)
         await update.message.reply_text(response.text)
     except Exception as e:
@@ -34,8 +33,4 @@ async def main():
     await app.run_polling()
 
 if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
-    try:
-        loop.run_until_complete(main())
-    finally:
-        loop.close()
+    asyncio.run(main())
