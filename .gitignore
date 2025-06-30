@@ -4,3 +4,4 @@ __pycache__/
 *.pyc
 telegram-ai-bot-backup.tar.gz
 tg/
+telegram-ai-bot/
