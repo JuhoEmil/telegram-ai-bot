@@ -13,10 +13,10 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=GEMINI_API_KEY)
 model = genai.GenerativeModel("gemini-1.5-flash")
 
-def start(update, context):
+def start(bot, update):
     update.message.reply_text("Hello! I'm a bot powered by Gemini AI.")
 
-def handle_message(update, context):
+def handle_message(bot, update):
     text = update.message.text
     try:
         # Generate response with Gemini
@@ -26,10 +26,10 @@ def handle_message(update, context):
         update.message.reply_text(f"Error: {str(e)}")
 
 def main():
-    updater = Updater(TELEGRAM_TOKEN, use_context=True)
+    updater = Updater(TELEGRAM_TOKEN)
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler("start", start))
-    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_message))
+    dispatcher.add_handler(MessageHandler(Filters.text, handle_message))
     print("Starting Telegram bot...")
     updater.start_polling()
     updater.idle()
