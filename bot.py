@@ -41,22 +41,24 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     except Exception as e:
         await update.message.reply_text(f"Virhe: {str(e)}")
 
-def main() -> None:
+async def main() -> None:
     """Käynnistää botin."""
     print("Käynnistään Telegram-botti...")
     try:
+        # Alusta Application
         app = Application.builder().token(TELEGRAM_TOKEN).build()
+
+        # Lisää käsittelijät
+        app.add_handler(CommandHandler("start", start))
+        app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+
+        # Käynnistä botti polling-moodissa
+        print("Aloitetaan polling...")
+        await app.run_polling(allowed_updates=Update.ALL_TYPES)
     except Exception as e:
         print(f"Telegram-virhe: {str(e)}")
         raise
 
-    # Lisää käsittelijät
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-
-    # Käynnistä botti
-    print("Aloitetaan polling...")
-    app.run_polling()
-
 if __name__ == "__main__":
-    main()
+    import asyncio
+    asyncio.run(main())
