@@ -1,3 +1,6 @@
 python-telegram-bot==13.14
 python-dotenv
 google-generativeai
+six>=1.15.0
+urllib3==1.26.9
+requests>=2.25.0
