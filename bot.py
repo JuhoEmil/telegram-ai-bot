@@ -35,7 +35,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     """Käsittelee käyttäjän viestit ja vastaa Gemini AI:lla."""
     user_message = update.message.text
     try:
-        # Kutsu Gemini API:ta
         response = model.generate_content(user_message)
         await update.message.reply_text(response.text)
     except Exception as e:
@@ -45,14 +44,9 @@ async def main() -> None:
     """Käynnistää botin."""
     print("Käynnistään Telegram-botti...")
     try:
-        # Alusta Application
         app = Application.builder().token(TELEGRAM_TOKEN).build()
-
-        # Lisää käsittelijät
         app.add_handler(CommandHandler("start", start))
         app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-
-        # Käynnistä botti polling-moodissa
         print("Aloitetaan polling...")
         await app.run_polling(allowed_updates=Update.ALL_TYPES)
     except Exception as e:
