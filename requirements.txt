@@ -1,3 +1,4 @@
-python-telegram-bot>=20.8
+python-telegram-bot==22.2
 python-dotenv
 google-generativeai
+nest_asyncio
